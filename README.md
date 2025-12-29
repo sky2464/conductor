@@ -1,12 +1,19 @@
-# Conductor Extension for Gemini CLI
+# Conductor
 
 **Measure twice, code once.**
 
-Conductor is a Gemini CLI extension that enables **Context-Driven Development**. It turns the Gemini CLI into a proactive project manager that follows a strict protocol to specify, plan, and implement software features and bug fixes.
+Conductor is an AI-powered development framework that enables **Context-Driven Development**. It turns your AI coding assistant into a proactive project manager that follows a strict protocol to specify, plan, and implement software features and bug fixes.
 
 Instead of just writing code, Conductor ensures a consistent, high-quality lifecycle for every task: **Context -> Spec & Plan -> Implement**.
 
 The philosophy behind Conductor is simple: control your code. By treating context as a managed artifact alongside your code, you transform your repository into a single source of truth that drives every agent interaction with deep, persistent project awareness.
+
+## Supported Platforms
+
+Conductor works with multiple AI coding assistants:
+
+- **Gemini CLI** — Uses TOML command files in `commands/conductor/`
+- **VS Code GitHub Copilot** — Uses Markdown prompt files in `.github/prompts/`
 
 ## Features
 
@@ -19,6 +26,8 @@ The philosophy behind Conductor is simple: control your code. By treating contex
 
 ## Installation
 
+### Gemini CLI
+
 Install the Conductor extension by running the following command from your terminal:
 
 ```bash
@@ -26,6 +35,19 @@ gemini extensions install https://github.com/gemini-cli-extensions/conductor --a
 ```
 
 The `--auto-update` is optional: if specified, it will update to new versions as they are released.
+
+### VS Code GitHub Copilot
+
+1. Clone or download this repository
+2. Copy the `.github/prompts/` directory to your project's `.github/` folder
+3. Optionally copy `.github/copilot-instructions.md` for Conductor-aware context
+
+The prompt files will be available as slash commands in Copilot Chat:
+- `/conductor.setup`
+- `/conductor.newTrack`
+- `/conductor.implement`
+- `/conductor.status`
+- `/conductor.revert`
 
 ## Usage
 
@@ -104,13 +126,13 @@ During implementation, you can also:
 
 ## Commands Reference
 
-| Command | Description | Artifacts |
-| :--- | :--- | :--- |
-| `/conductor:setup` | Scaffolds the project and sets up the Conductor environment. Run this once per project. | `conductor/product.md`<br>`conductor/product-guidelines.md`<br>`conductor/tech-stack.md`<br>`conductor/workflow.md`<br>`conductor/tracks.md` |
-| `/conductor:newTrack` | Starts a new feature or bug track. Generates `spec.md` and `plan.md`. | `conductor/tracks/<id>/spec.md`<br>`conductor/tracks/<id>/plan.md`<br>`conductor/tracks.md` |
-| `/conductor:implement` | Executes the tasks defined in the current track's plan. | `conductor/tracks.md`<br>`conductor/tracks/<id>/plan.md` |
-| `/conductor:status` | Displays the current progress of the tracks file and active tracks. | Reads `conductor/tracks.md` |
-| `/conductor:revert` | Reverts a track, phase, or task by analyzing git history. | Reverts git history |
+| Command (Gemini CLI) | Command (VS Code Copilot) | Description | Artifacts |
+| :--- | :--- | :--- | :--- |
+| `/conductor:setup` | `/conductor.setup` | Scaffolds the project and sets up the Conductor environment. Run this once per project. | `conductor/product.md`<br>`conductor/product-guidelines.md`<br>`conductor/tech-stack.md`<br>`conductor/workflow.md`<br>`conductor/tracks.md` |
+| `/conductor:newTrack` | `/conductor.newTrack` | Starts a new feature or bug track. Generates `spec.md` and `plan.md`. | `conductor/tracks/<id>/spec.md`<br>`conductor/tracks/<id>/plan.md`<br>`conductor/tracks.md` |
+| `/conductor:implement` | `/conductor.implement` | Executes the tasks defined in the current track's plan. | `conductor/tracks.md`<br>`conductor/tracks/<id>/plan.md` |
+| `/conductor:status` | `/conductor.status` | Displays the current progress of the tracks file and active tracks. | Reads `conductor/tracks.md` |
+| `/conductor:revert` | `/conductor.revert` | Reverts a track, phase, or task by analyzing git history. | Reverts git history |
 
 ## Resources
 
